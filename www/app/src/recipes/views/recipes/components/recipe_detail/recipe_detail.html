@@ -1,0 +1,20 @@
+<div class="component--recipe-detail">
+  <ol class="breadcrumb">
+    <li>
+      <a href ui-sref="app.recipes.list">Recipes</a>
+    </li>
+    <li class="active" ng-bind-html="recipe.name"></li>
+  </ol>
+  <h2 class="text-center" ng-bind-html="recipe.name"></h2>
+  <p ng-bind-html="recipe.description" ng-if="recipe.description"></p>
+  <h3>Ingredients <span class="label label-default pull-right" ng-bind="totalFoods"></span></h3>
+  <table class="table">
+    <tbody>
+    <tr ng-repeat="ingredient in recipeIngredients">
+      <td ng-bind-html="ingredient"></td>
+    </tr>
+    </tbody>
+  </table>
+  <h3 ng-if="recipe.instructions">Instructions</h3>
+  <div ng-bind-html="recipe.instructions" ng-if="recipe.instructions"></div>
+</div>

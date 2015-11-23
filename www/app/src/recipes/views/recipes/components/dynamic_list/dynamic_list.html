@@ -1,0 +1,21 @@
+<div class="component--dynamic-list">
+  <div class="input-group">
+    <input class="form-control"
+           type="text"
+           placeholder="{{ placeholder }}"
+           ng-model="name"
+           ng-keypress="onKeyPressed($event)"
+           typeahead-min-length="2"
+           uib-typeahead="item.name for item in collection | filter: $viewValue | limitTo: 10">
+    <span class="input-group-btn">
+      <div x-recipe-search-filter class="btn-group" uib-dropdown></div>
+      <button class="btn btn-default" type="button" ng-click="addElement(name)">{{ button }}</button>
+    </span>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="element in elements">
+      <span>{{ element.name }}</span>
+      <span class="close pull-right" ng-click="removeElement(element)">&times;</span>
+    </li>
+  </ul>
+</div>

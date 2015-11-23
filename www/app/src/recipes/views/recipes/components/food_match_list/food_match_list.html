@@ -1,0 +1,26 @@
+<div class="component--food-match-list">
+  <ol class="breadcrumb">
+    <li>
+      <a href ui-sref="app.recipes.list">Recipes</a>
+    </li>
+    <li class="active">Matching Recipes</li>
+  </ol>
+  <h2 class="text-center">Matching Recipes</h2>
+  <p class="text-center">
+    <ng-pluralize count="matchingRecipes.length" when="{
+      '0': 'No matching recipes',
+      'one': '1 matching recipe',
+      'other': '{} matching recipes'
+    }"></ng-pluralize>
+  </p>
+  <span class="text-center" ng-hide="hasSelectedFoods">No matching recipes</span>
+  <table class="table table-hover">
+    <tbody>
+    <tr ng-repeat="recipe in matchingRecipes | orderBy: 'name'"
+        ng-click="setSelectedRecipe(recipe)"
+        ui-sref="app.recipes.detail({recipeId: recipe.id})">
+      <td ng-bind-html="recipe.name"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
