@@ -2,77 +2,86 @@ describe("a recipe model", function () {
 
   var recipesModel;
 
-  var tomatoes = {
-    id: 1,
-    name: "tomatoes"
-  };
-
-  var onions = {
-    id: 2,
-    name: "onions"
-  };
-
-  var tomatillos = {
-    id: 3,
-    name: "tomatillos"
-  };
-
-  var recipe1 = {
-    id: 1,
-    name: "Recipe 1",
-    foods: [1]
-  };
-
-  var recipe2 = {
-    id: 2,
-    name: "Recipe 2",
-    foods: [1, 2]
-  };
-
-  var recipe3 = {
-    id: 3,
-    name: "Recipe 3",
-    foods: [1, 2, 3]
-  };
-
-  var responseData = {
-    foods: [tomatoes, onions, tomatillos],
-    recipes: [recipe1, recipe2, recipe3],
-    ingredients: [{
-      id: 1,
-      description: "",
-      recipe: 1,
-      food: 1
-    }, {
-      id: 2,
-      description: "",
-      recipe: 2,
-      food: 1
-    }, {
-      id: 3,
-      description: "",
-      recipe: 2,
-      food: 2
-    }, {
-      id: 4,
-      description: "",
-      recipe: 3,
-      food: 1
-    }, {
-      id: 5,
-      description: "",
-      recipe: 3,
-      food: 2
-    }, {
-      id: 6,
-      description: "",
-      recipe: 3,
-      food: 3
-    }]
-  };
+  // Data elements...
+  var tomatoes;
+  var onions;
+  var tomatillos;
+  var recipe1;
+  var recipe2;
+  var recipe3;
+  var responseData;
 
   beforeEach(function () {
     module("app");
+
+    tomatoes = {
+      id: 1,
+      name: "tomatoes"
+    };
+
+    onions = {
+      id: 2,
+      name: "onions"
+    };
+
+    tomatillos = {
+      id: 3,
+      name: "tomatillos"
+    };
+
+    recipe1 = {
+      id: 1,
+      name: "Recipe 1",
+      foods: [1]
+    };
+
+    recipe2 = {
+      id: 2,
+      name: "Recipe 2",
+      foods: [1, 2]
+    };
+
+    recipe3 = {
+      id: 3,
+      name: "Recipe 3",
+      foods: [1, 2, 3]
+    };
+
+    responseData = {
+      foods: [tomatoes, onions, tomatillos],
+      recipes: [recipe1, recipe2, recipe3],
+      ingredients: [{
+        id: 1,
+        description: "",
+        recipe: 1,
+        food: 1
+      }, {
+        id: 2,
+        description: "",
+        recipe: 2,
+        food: 1
+      }, {
+        id: 3,
+        description: "",
+        recipe: 2,
+        food: 2
+      }, {
+        id: 4,
+        description: "",
+        recipe: 3,
+        food: 1
+      }, {
+        id: 5,
+        description: "",
+        recipe: 3,
+        food: 2
+      }, {
+        id: 6,
+        description: "",
+        recipe: 3,
+        food: 3
+      }]
+    };
 
     inject(function ($injector) {
       recipesModel = $injector.get("recipesModel");
@@ -80,33 +89,17 @@ describe("a recipe model", function () {
   });
 
   it("should add a selected food", function () {
-    recipesModel.addSelectedFood({
-      id: 1,
-      name: "tomatoes"
-    });
+    recipesModel.addSelectedFood(tomatoes);
 
     expect(recipesModel.hasSelectedFoods()).toBe(true);
-
-    expect(recipesModel.getSelectedFoods()).toEqual([{
-      id: 1,
-      name: "tomatoes"
-    }]);
+    expect(recipesModel.getSelectedFoods()).toEqual([tomatoes]);
   });
 
   it("should change a selected recipe", function () {
-    recipesModel.setSelectedRecipe({
-      id: 1,
-      name: "Pico de Gallo",
-      foods: [1]
-    });
+    recipesModel.setSelectedRecipe(recipe1);
 
-    expect(recipesModel.getSelectedRecipe()).toEqual({
-      id: 1,
-      name: "Pico de Gallo",
-      foods: [1]
-    });
-
-    expect(recipesModel.isSelectedRecipe(recipesModel.getSelectedRecipe())).toBe(true);
+    expect(recipesModel.getSelectedRecipe()).toEqual(recipe1);
+    expect(recipesModel.isSelectedRecipe(recipe1)).toBe(true);
   });
 
   it("should update the information for a collection of recipes", function () {
