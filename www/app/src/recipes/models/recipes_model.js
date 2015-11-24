@@ -77,7 +77,7 @@
         });
 
         _.forEach(recipesWithFood, function (recipe) {
-          if (!_.has(rankMap, recipe)) {
+          if (!_.has(rankMap, recipe.id)) {
             rankMap[recipe.id] = 0;
           }
 
