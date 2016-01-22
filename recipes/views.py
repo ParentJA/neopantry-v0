@@ -1,5 +1,3 @@
-__author__ = 'jason.a.parent@gmail.com (Jason Parent)'
-
 # Standard library imports...
 from itertools import imap, izip
 
@@ -13,6 +11,8 @@ from django.http import Http404
 # Local imports...
 from .models import Ingredient, Recipe
 from .serializers import BasicRecipeSerializer, FoodSerializer, FullRecipeSerializer, IngredientSerializer
+
+__author__ = 'jason.a.parent@gmail.com (Jason Parent)'
 
 
 class RecipeAPIViewSet(viewsets.ViewSet):
