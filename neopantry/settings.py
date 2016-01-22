@@ -1,7 +1,7 @@
-__author__ = 'jason.a.parent@gmail.com (Jason Parent)'
-
 # Standard library imports...
 import os
+
+__author__ = 'jason.a.parent@gmail.com (Jason Parent)'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -10,6 +10,8 @@ SECRET_KEY = 'p)6^zcv&rrwoywh%rg))r2=29r71lds1njg%ypiwy5ffu6#@89'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+AUTH_USER_MODEL = 'accounts.User'
 
 DEFAULT_APPS = (
     'django.contrib.admin',
@@ -29,6 +31,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
+    'accounts',
     'recipes',
 )
 
