@@ -1,7 +1,7 @@
-__author__ = 'jason.a.parent@gmail.com (Jason Parent)'
-
 # Django imports...
 from django.db import models
+
+__author__ = 'jason.a.parent@gmail.com (Jason Parent)'
 
 
 class Recipe(models.Model):
