@@ -10,7 +10,10 @@ __author__ = 'jason.a.parent@gmail.com (Jason Parent)'
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='index.html')),
+    # Static site...
+    url(r'^$', TemplateView.as_view(template_name='site.html')),
+    # Web app...
+    url(r'^app/$', TemplateView.as_view(template_name='app.html')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^api/v1/recipes/', include('recipes.urls')),
     url(r'^grappelli/', include('grappelli.urls')),

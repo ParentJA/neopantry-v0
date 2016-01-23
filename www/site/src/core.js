@@ -9,23 +9,16 @@
 
   function UiRouterConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state("app", {
-        url: "/app",
+      .state("site", {
+        url: "/site",
         template: "<div ui-view></div>",
-        resolve: {
-          recipes: function (recipesModel, loadRecipesService) {
-            if (_.isEmpty(recipesModel.getRecipes())) {
-              return loadRecipesService();
-            }
-
-            return recipesModel;
-          }
-        },
         abstract: true
       });
 
+    $urlRouterProvider.when("/", "/site/");
+
     //Default state...
-    $urlRouterProvider.otherwise("/app/recipes/list");
+    $urlRouterProvider.otherwise("/site/");
   }
 
   function UiRunner($rootScope, $state, navigationService) {
@@ -35,14 +28,14 @@
     });
   }
 
-  function MainController($scope, $state, $uibModal, accountsService, navigationService) {
-    //$scope.hasUser = false;
+  function MainController($scope, $state, $uibModal, $window, accountsService, navigationService) {
+    $scope.hasUser = false;
     $scope.navigationService = navigationService;
-    //$scope.user = null;
+    $scope.user = null;
 
-    /*$scope.logOut = function logOut() {
+    $scope.logOut = function logOut() {
       accountsService.logOut().then(function () {
-        $state.go("home");
+        //$state.go("site.home");
       });
     };
 
@@ -64,6 +57,10 @@
       });
     };
 
+    $scope.viewRecipes = function viewRecipes() {
+      $window.location.href = "/app";
+    };
+
     $scope.$watch(accountsService.hasUser, function (newValue, oldValue) {
       if (!_.isEqual(newValue, oldValue)) {
         activate();
@@ -75,16 +72,16 @@
     function activate() {
       $scope.hasUser = accountsService.hasUser();
       $scope.user = accountsService.getUser();
-    }*/
+    }
   }
 
-  angular.module("app", ["ngAnimate", "ngCookies", "ngSanitize", "ui.bootstrap", "ui.router"])
+  angular.module("site", ["ngAnimate", "ngCookies", "ngSanitize", "ui.bootstrap", "ui.router"])
     .constant("BASE_URL", "/api/v1/")
     .config(["$httpProvider", HttpConfig])
     .config(["$stateProvider", "$urlRouterProvider", UiRouterConfig])
     .run(["$rootScope", "$state", "navigationService", UiRunner])
     .controller("MainController", [
-      "$scope", "$state", "$uibModal", "accountsService", "navigationService", MainController
+      "$scope", "$state", "$uibModal", "$window", "accountsService", "navigationService", MainController
     ]);
 
 })(window, window.angular);
