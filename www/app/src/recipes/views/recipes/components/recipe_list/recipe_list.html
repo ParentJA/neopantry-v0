@@ -1,5 +1,5 @@
 <div class="component--recipe-list">
-  <h2 class="text-center">Recipes</h2>
+  <h2 class="text-center">My Recipes</h2>
   <p class="text-center" ng-if="isRecipeName()">
     {{ totalRecipes }} total recipes
   </p>
@@ -29,6 +29,22 @@
       </a>
     </span>
   </div>
+
+  <!-- Recipe name search -->
+  <!--<div ng-if="isRecipeName()">
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="Enter recipe name..." ng-model="recipeName">
+    </div>
+    <ul class="media-list">
+      <li class="media" ng-repeat="recipe in recipes | filter: {name: recipeName}">
+        <div class="media-body">
+          <h4 class="media-heading">
+            <a ng-bind-html="recipe.name" ui-sref="app.recipes.detail({recipeId: recipe.id})"></a>
+          </h4>
+        </div>
+      </li>
+    </ul>
+  </div>-->
 
   <!-- Ingredients search -->
   <div x-dynamic-list

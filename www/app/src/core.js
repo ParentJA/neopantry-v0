@@ -25,20 +25,66 @@
       });
 
     //Default state...
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/app/recipes/list");
   }
 
-  function UiRunner($rootScope, $state) {
+  function UiRunner($rootScope, $state, navigationService) {
     $rootScope.$state = $state;
+    $rootScope.$on("$stateChangeSuccess", function () {
+      navigationService.closeNavigation();
+    });
   }
 
-  function MainController($scope) {}
+  function MainController($scope, $state, $uibModal, accountsService, navigationService) {
+    //$scope.hasUser = false;
+    $scope.navigationService = navigationService;
+    //$scope.user = null;
+
+    /*$scope.logOut = function logOut() {
+      accountsService.logOut().then(function () {
+        $state.go("home");
+      });
+    };
+
+    $scope.openLogIn = function openLogIn() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "/static/accounts/views/log_in/log_in.html",
+        controller: "LogInController",
+        size: "sm"
+      });
+    };
+
+    $scope.openSignUp = function openSignUp() {
+      $uibModal.open({
+        animation: true,
+        templateUrl: "/static/accounts/views/sign_up/sign_up.html",
+        controller: "SignUpController",
+        size: "sm"
+      });
+    };
+
+    $scope.$watch(accountsService.hasUser, function (newValue, oldValue) {
+      if (!_.isEqual(newValue, oldValue)) {
+        activate();
+      }
+    });
+
+    activate();
+
+    function activate() {
+      $scope.hasUser = accountsService.hasUser();
+      $scope.user = accountsService.getUser();
+    }*/
+  }
 
   angular.module("app", ["ngAnimate", "ngCookies", "ngSanitize", "ui.bootstrap", "ui.router"])
     .constant("BASE_URL", "/api/v1/")
     .config(["$httpProvider", HttpConfig])
     .config(["$stateProvider", "$urlRouterProvider", UiRouterConfig])
-    .run(["$rootScope", "$state", UiRunner])
-    .controller("MainController", ["$scope", MainController]);
+    .run(["$rootScope", "$state", "navigationService", UiRunner])
+    .controller("MainController", [
+      "$scope", "$state", "$uibModal", "accountsService", "navigationService", MainController
+    ]);
 
 })(window, window.angular);
