@@ -19,3 +19,8 @@ DATABASES = {
 }
 
 STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../static'))
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'www/app/dist'),
+    os.path.join(BASE_DIR, 'www/site/dist'),
+)
