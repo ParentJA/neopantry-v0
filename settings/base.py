@@ -70,13 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'neopantry.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -102,8 +95,3 @@ DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DJANGO_WYSIWYG_FLAVOR = 'tinymce_advanced'
 
 LETTUCE_USE_TEST_DATABASE = True
-
-try:
-    from .local_settings import *
-except ImportError:
-    pass
