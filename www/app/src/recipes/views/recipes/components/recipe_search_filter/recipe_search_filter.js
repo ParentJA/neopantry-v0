@@ -14,7 +14,7 @@
     return {
       restrict: "A",
       scope: {},
-      templateUrl: "/static/recipes/views/recipes/components/recipe_search_filter/recipe_search_filter.html",
+      templateUrl: "recipes/views/recipes/components/recipe_search_filter/recipe_search_filter.html",
       controller: "RecipeSearchFilterController"
     };
   }

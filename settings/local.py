@@ -19,8 +19,6 @@ DATABASES = {
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'www/app/src'),
-    os.path.join(BASE_DIR, 'www/site/src'),
-    os.path.join(BASE_DIR, 'www/dist'),
-    os.path.join(BASE_DIR, 'www/bower_components'),
+    os.path.join(BASE_DIR, 'www/app/dist'),
+    os.path.join(BASE_DIR, 'www/site/dist'),
 )

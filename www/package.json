@@ -22,5 +22,11 @@
     "karma-chrome-launcher": "^0.2.1",
     "karma-jasmine": "^0.3.6",
     "protractor": "^2.5.1"
+  },
+  "dependencies": {
+    "add-stream": "^1.0.0",
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-concat": "^2.6.0"
   }
 }

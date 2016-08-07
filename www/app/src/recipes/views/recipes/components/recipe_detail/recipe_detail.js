@@ -19,7 +19,7 @@
     return {
       restrict: "A",
       scope: {},
-      templateUrl: "/static/recipes/views/recipes/components/recipe_detail/recipe_detail.html",
+      templateUrl: "recipes/views/recipes/components/recipe_detail/recipe_detail.html",
       controller: "RecipeDetailController"
     };
   }

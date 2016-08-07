@@ -6,12 +6,12 @@
     $stateProvider
       .state("sign_up", {
         url: "/sign_up",
-        templateUrl: "/static/accounts/views/sign_up/sign_up.html",
+        templateUrl: "accounts/views/sign_up/sign_up.html",
         controller: "SignUpController"
       })
       .state("log_in", {
         url: "/log_in",
-        templateUrl: "/static/accounts/views/log_in/log_in.html",
+        templateUrl: "accounts/views/log_in/log_in.html",
         controller: "LogInController"
       });
   }

@@ -6,17 +6,17 @@
     $stateProvider
       .state("app.recipes", {
         url: "/recipes",
-        templateUrl: "/static/recipes/views/recipes/recipes.html",
+        templateUrl: "recipes/views/recipes/recipes.html",
         controller: "RecipesController"
       })
       .state("app.recipes.list", {
         url: "/list",
-        templateUrl: "/static/recipes/views/recipes/components/recipe_list/recipe_list.html",
+        templateUrl: "recipes/views/recipes/components/recipe_list/recipe_list.html",
         controller: "RecipeListController"
       })
       .state("app.recipes.detail", {
         url: "/detail/:recipeId",
-        templateUrl: "/static/recipes/views/recipes/components/recipe_detail/recipe_detail.html",
+        templateUrl: "recipes/views/recipes/components/recipe_detail/recipe_detail.html",
         controller: "RecipeDetailController",
         resolve: {
           recipe: function ($stateParams, loadRecipeService, recipes, recipesModel) {
@@ -33,7 +33,7 @@
       })
       .state("app.recipes.match_list", {
         url: "/match_list",
-        templateUrl: "/static/recipes/views/recipes/components/food_match_list/food_match_list.html",
+        templateUrl: "recipes/views/recipes/components/food_match_list/food_match_list.html",
         controller: "FoodMatchListController"
       });
   }

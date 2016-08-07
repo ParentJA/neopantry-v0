@@ -5,7 +5,7 @@
   function HomeRouterConfig($stateProvider) {
     $stateProvider.state("site.home", {
       url: "/",
-      templateUrl: "/static/home/views/home/home.html",
+      templateUrl: "home/views/home/home.html",
       controller: "HomeController"
     });
   }

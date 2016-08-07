@@ -5,7 +5,7 @@
   function PricingRouterConfig($stateProvider) {
     $stateProvider.state("site.pricing", {
       url: "/pricing",
-      templateUrl: "/static/pricing/views/pricing/pricing.html",
+      templateUrl: "pricing/views/pricing/pricing.html",
       controller: "PricingController"
     });
   }

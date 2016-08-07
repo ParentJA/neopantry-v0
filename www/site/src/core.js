@@ -42,7 +42,7 @@
     $scope.openLogIn = function openLogIn() {
       $uibModal.open({
         animation: true,
-        templateUrl: "/static/accounts/views/log_in/log_in.html",
+        templateUrl: "accounts/views/log_in/log_in.html",
         controller: "LogInController",
         size: "sm"
       });
@@ -51,7 +51,7 @@
     $scope.openSignUp = function openSignUp() {
       $uibModal.open({
         animation: true,
-        templateUrl: "/static/accounts/views/sign_up/sign_up.html",
+        templateUrl: "accounts/views/sign_up/sign_up.html",
         controller: "SignUpController",
         size: "sm"
       });
@@ -75,7 +75,9 @@
     }
   }
 
-  angular.module("site", ["ngAnimate", "ngCookies", "ngSanitize", "ui.bootstrap", "ui.router"])
+  angular.module("templates", []);
+
+  angular.module("site", ["ngAnimate", "ngCookies", "ngSanitize", "ui.bootstrap", "ui.router", "templates"])
     .constant("BASE_URL", "/api/v1/")
     .config(["$httpProvider", HttpConfig])
     .config(["$stateProvider", "$urlRouterProvider", UiRouterConfig])

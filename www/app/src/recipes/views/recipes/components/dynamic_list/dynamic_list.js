@@ -57,7 +57,7 @@
         placeholder: "@",
         button: "@"
       },
-      templateUrl: "/static/recipes/views/recipes/components/dynamic_list/dynamic_list.html",
+      templateUrl: "recipes/views/recipes/components/dynamic_list/dynamic_list.html",
       controller: "DynamicListController"
     };
   }

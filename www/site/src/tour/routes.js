@@ -5,7 +5,7 @@
   function TourRouterConfig($stateProvider) {
     $stateProvider.state("site.tour", {
       url: "/tour",
-      templateUrl: "/static/tour/views/tour/tour.html",
+      templateUrl: "tour/views/tour/tour.html",
       controller: "TourController"
     });
   }

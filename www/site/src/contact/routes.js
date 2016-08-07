@@ -5,7 +5,7 @@
   function ContactRouterConfig($stateProvider) {
     $stateProvider.state("site.contact", {
       url: "/contact",
-      templateUrl: "/static/contact/views/contact/contact.html",
+      templateUrl: "contact/views/contact/contact.html",
       controller: "ContactController"
     });
   }

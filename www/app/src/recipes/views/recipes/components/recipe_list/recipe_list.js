@@ -8,7 +8,7 @@
     return {
       restrict: "A",
       scope: {},
-      templateUrl: "/static/recipes/views/recipes/components/recipe_list/recipe_list.html",
+      templateUrl: "recipes/views/recipes/components/recipe_list/recipe_list.html",
       controller: "RecipeListController"
     };
   }
