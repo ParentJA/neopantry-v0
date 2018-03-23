@@ -1,14 +1,14 @@
-# Third-party imports...
+# Django imports.
+from django.contrib.auth import authenticate, get_user_model, login, logout
+
+# Third-party imports.
 from rest_framework import generics, permissions, status, views
 from rest_framework.response import Response
 
-# Django imports...
-from django.contrib.auth import authenticate, get_user_model, login, logout
-
-# Local imports...
+# Local imports.
 from .serializers import UserSerializer
 
-__author__ = 'jason.a.parent@gmail.com (Jason Parent)'
+__author__ = 'Jason Parent'
 
 User = get_user_model()
 

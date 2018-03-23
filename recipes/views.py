@@ -1,38 +1,69 @@
-# Standard library imports...
-from itertools import imap, izip
+# Django imports.
+from django.contrib.postgres.search import SearchQuery, SearchRank
+from django.db.models import F, Prefetch
 
-# Third-party imports...
-from rest_framework import status, viewsets
-from rest_framework.response import Response
+# Third-party imports.
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics, permissions, viewsets
 
-# Django imports...
-from django.http import Http404
+# Local imports.
+from .models import Ingredient, Recipe, RecipeNote, RecipeReview
+from .permissions import IsResourceOwner
+from .serializers import (
+    RecipeDetailSerializer, RecipeListSerializer, RecipeNoteSerializer, RecipeReviewSerializer
+)
 
-# Local imports...
-from .models import Ingredient, Recipe
-from .serializers import BasicRecipeSerializer, FoodSerializer, FullRecipeSerializer, IngredientSerializer
-
-__author__ = 'jason.a.parent@gmail.com (Jason Parent)'
+__author__ = 'Jason Parent'
 
 
-class RecipeAPIViewSet(viewsets.ViewSet):
-    def list(self, request):
-        ingredients = Ingredient.objects.select_related('recipe', 'food').defer(
-            'recipe__description', 'recipe__instructions'
+class RecipeListView(generics.ListAPIView):
+    serializer_class = RecipeListSerializer
+
+    def get_queryset(self):
+        query = self.request.query_params.get('query')
+        if query is None:
+            return Recipe.objects.prefetch_related('foods')
+        search_query = SearchQuery(query)
+        return Recipe.objects.prefetch_related('foods').annotate(
+            rank=SearchRank(F('search_vector'), search_query)
+        ).filter(
+            rank__gte=0.1
+        ).order_by('-rank')
+
+
+class RecipeDetailView(generics.RetrieveAPIView):
+    serializer_class = RecipeDetailSerializer
+
+    def get_queryset(self):
+        return Recipe.objects.prefetch_related(
+            Prefetch('ingredients', queryset=Ingredient.objects.select_related('food').order_by('rank'))
         )
 
-        recipes, foods = izip(*imap(lambda i: (i.recipe, i.food), ingredients))
 
-        return Response(status=status.HTTP_200_OK, data={
-            'foods': FoodSerializer(set(foods), many=True).data,
-            'ingredients': IngredientSerializer(set(ingredients), many=True).data,
-            'recipes': BasicRecipeSerializer(set(recipes), many=True).data
-        })
+class RecipeNoteView(viewsets.ModelViewSet):
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('recipe',)
+    permission_classes = (permissions.IsAuthenticated, IsResourceOwner,)
+    serializer_class = RecipeNoteSerializer
 
-    def retrieve(self, request, pk):
-        try:
-            recipe = Recipe.objects.only('id', 'description', 'instructions').get(pk=pk)
-        except Recipe.DoesNotExist:
-            raise Http404
+    def get_queryset(self):
+        return RecipeNote.objects.filter(user=self.request.user)
 
-        return Response(status=status.HTTP_200_OK, data=FullRecipeSerializer(recipe).data)
+
+class RecipeReviewView(generics.ListCreateAPIView):
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('recipe', 'user',)
+    permission_classes = (permissions.IsAuthenticated, IsResourceOwner,)
+    queryset = RecipeReview.objects.select_related('recipe', 'user').all()
+    serializer_class = RecipeReviewSerializer
+
+    def perform_create(self, serializer):
+        recipe_review = serializer.save()
+
+        # Update recipe.
+        recipe = recipe_review.recipe
+        recipe.num_make_again += (1 if recipe_review.make_again else 0)
+        recipe.num_ratings += 1
+        recipe.total_rating += recipe_review.rating
+        recipe.num_reviews += 1
+        recipe.save()

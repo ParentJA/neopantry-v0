@@ -1,10 +1,10 @@
-# Third-party imports...
-from rest_framework import serializers
-
-# Django imports...
+# Django imports.
 from django.contrib.auth import get_user_model
 
-__author__ = 'jason.a.parent@gmail.com (Jason Parent)'
+# Third-party imports.
+from rest_framework import serializers
+
+__author__ = 'Jason Parent'
 
 User = get_user_model()
 
@@ -17,7 +17,6 @@ class UserSerializer(serializers.ModelSerializer):
         user = User(**validated_data)
         user.set_password(validated_data['password'])
         user.save()
-
         return user
 
     class Meta:
