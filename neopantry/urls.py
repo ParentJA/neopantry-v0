@@ -13,7 +13,7 @@ admin.autodiscover()
 urlpatterns = [
     # Web app...
     # path('app/', TemplateView.as_view(template_name='index.html')),
-    path('accounts/', include('accounts.urls')),
+    path('api/v1/accounts/', include('accounts.urls')),
     path('api/v1/recipes/', include('recipes.urls')),
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),

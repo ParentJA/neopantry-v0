@@ -55,9 +55,9 @@ class RecipeNoteSerializer(serializers.ModelSerializer):
 
 
 class RecipeReviewSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
+    username = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model = RecipeReview
-        fields = ('id', 'recipe', 'user', 'make_again', 'rating', 'review',)
-        read_only_fields = ('id', 'user',)
+        fields = ('id', 'recipe', 'user', 'make_again', 'rating', 'review', 'username',)
+        read_only_fields = ('id', 'username',)

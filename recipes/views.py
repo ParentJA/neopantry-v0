@@ -62,8 +62,7 @@ class RecipeReviewView(generics.ListCreateAPIView):
 
         # Update recipe.
         recipe = recipe_review.recipe
-        recipe.num_make_again += (1 if recipe_review.make_again else 0)
-        recipe.num_ratings += 1
-        recipe.total_rating += recipe_review.rating
+        recipe.total_make_again += (1 if recipe_review.make_again else 0)
+        recipe.total_ratings += recipe_review.rating
         recipe.num_reviews += 1
         recipe.save()

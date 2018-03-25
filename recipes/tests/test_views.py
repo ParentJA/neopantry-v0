@@ -229,8 +229,8 @@ class RecipeReviewTest(APITestCase):
 
     def test_user_can_create_recipe_review(self):
         # Given.
-        recipe = RecipeFactory(total_rating=20, num_ratings=4, num_reviews=4)
-        review = RecipeReviewFactory.stub(recipe=recipe, user=self.user1, rating=5)
+        recipe = RecipeFactory(total_make_again=4, total_ratings=20, num_reviews=4)
+        review = RecipeReviewFactory.stub(recipe=recipe, user=self.user1, make_again=True, rating=5)
 
         # And.
         self.assertEqual(5.0, recipe.average_rating)
@@ -251,12 +251,12 @@ class RecipeReviewTest(APITestCase):
         self.assertEqual(review.make_again, response.data['make_again'])
         self.assertEqual(review.rating, response.data['rating'])
         self.assertEqual(review.review, response.data['review'])
+        self.assertEqual(review.user.username, response.data['username'])
 
         # And.
         recipe = Recipe.objects.get(pk=recipe.pk)
-        self.assertEqual(25, recipe.total_rating)
-        self.assertEqual(5, recipe.num_ratings)
-        self.assertEqual(5.0, recipe.average_rating)
+        self.assertEqual(100, recipe.average_make_again)
+        self.assertEqual(5, recipe.average_rating)
         self.assertEqual(5, recipe.num_reviews)
 
     def test_user_can_only_create_recipe_review_for_self(self):

@@ -97,3 +97,9 @@ LETTUCE_USE_TEST_DATABASE = True
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 
 PHONENUMBER_DEFAULT_REGION = 'us'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    )
+}
