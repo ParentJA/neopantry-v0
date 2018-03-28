@@ -41,6 +41,8 @@ class IngredientFactory(DjangoModelFactory):
     description = faker.Faker('sentence')
     recipe = SubFactory(RecipeFactory)
     food = SubFactory(FoodFactory)
+    rank = 0
+    is_optional = faker.Faker('boolean')
 
     class Meta:
         model = 'recipes.Ingredient'

@@ -19,8 +19,8 @@ class FoodSerializer(serializers.ModelSerializer):
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
-        fields = ('id', 'description', 'rank',)
-        read_only_fields = ('id', 'description', 'rank',)
+        fields = ('id', 'description', 'rank', 'is_optional',)
+        read_only_fields = ('id', 'description', 'rank', 'is_optional',)
 
 
 class RecipeDetailSerializer(serializers.ModelSerializer):

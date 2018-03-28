@@ -17,7 +17,7 @@ class IngredientInline(admin.TabularInline):
     extra = 1
 
     # Handle fields.
-    fields = ('description', 'food', 'amount', 'measurement', 'rank',)
+    fields = ('description', 'food', 'amount', 'measurement', 'rank', 'is_optional',)
     raw_id_fields = ('food', 'measurement',)
     autocomplete_lookup_fields = {
         'fk': ('food', 'measurement',)

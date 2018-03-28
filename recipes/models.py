@@ -101,6 +101,7 @@ class Ingredient(models.Model):
     amount = models.DecimalField(decimal_places=3, max_digits=6, null=True, blank=True)
     measurement = models.ForeignKey('recipes.Measurement', null=True, blank=True, on_delete=models.SET_NULL)
     rank = models.IntegerField(default=0)
+    is_optional = models.BooleanField(default=False)
 
     class Meta:
         default_related_name = 'ingredients'
