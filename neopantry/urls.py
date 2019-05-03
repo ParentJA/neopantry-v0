@@ -1,25 +1,31 @@
-# Django imports...
+# Django imports.
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls import include
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.urls import path
 from django.views.generic import TemplateView
 
-__author__ = 'jason.a.parent@gmail.com (Jason Parent)'
+__author__ = 'Jason Parent'
 
 admin.autodiscover()
 
 urlpatterns = [
-    # Static site...
-    url(r'^$', TemplateView.as_view(template_name='site.html')),
     # Web app...
-    url(r'^app/$', TemplateView.as_view(template_name='app.html')),
-    url(r'^accounts/', include('accounts.urls')),
-    url(r'^api/v1/recipes/', include('recipes.urls')),
-    url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^tinymce/', include('tinymce.urls')),
+    # path('app/', TemplateView.as_view(template_name='index.html')),
+    path('api/v1/accounts/', include('accounts.urls')),
+    path('api/v1/recipes/', include('recipes.urls')),
+    path('grappelli/', include('grappelli.urls')),
+    path('admin/', admin.site.urls),
+    path('tinymce/', include('tinymce.urls')),
+    path('', TemplateView.as_view(template_name='index.html')),
+    # Static site.
+    # path('', TemplateView.as_view(template_name='site.html')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += path('__debug__/', include(debug_toolbar.urls)),
 
 # Serves static files in development environment...
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

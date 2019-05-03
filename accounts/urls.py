@@ -1,14 +1,13 @@
-# Django imports...
-from django.conf.urls import url
+# Django imports.
+from django.urls import path
 
-# Local imports...
+# Local imports.
 from .views import LogInView, LogOutView, SignUpView
 
-__author__ = 'jason.a.parent@gmail.com (Jason Parent)'
-
+__author__ = 'Jason Parent'
 
 urlpatterns = [
-    url(r'^log_in/$', LogInView.as_view()),
-    url(r'^log_out/$', LogOutView.as_view()),
-    url(r'^sign_up/$', SignUpView.as_view()),
+    path('log-in/', LogInView.as_view(), name='log-in'),
+    path('log-out/', LogOutView.as_view(), name='log-out'),
+    path('sign-up/', SignUpView.as_view(), name='sign-up'),
 ]
